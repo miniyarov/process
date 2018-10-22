@@ -465,7 +465,11 @@ class Process implements \IteratorAggregate
                     $this->fallbackStatus['exitcode'] = (int) $data;
                 }
             }
-            usleep(1000);
+            if ($this->isRunning()) {
+                usleep(1000);
+            } else {
+                break;
+            }
         } while ($wait);
     }
 
